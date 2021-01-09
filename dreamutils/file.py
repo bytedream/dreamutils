@@ -1,18 +1,19 @@
 #!/usr/bin/python3
 
 import os as _os
-from typing import Generator as _Generator, List as _List, Union as _Union
+from typing import Iterator as _Iterator, List as _List, Union as _Union
 
 """This file contains utils for file manipulation"""
 
 
-def recursive_directory_data(directory: str, full_path=True) -> _Generator[str]:
+def recursive_directory_data(directory: str, full_path=True, only_files=False) -> _Iterator[str]:
     """
     _Lists every subfile and subdirectory of the given directory
 
     Args:
-        directory (str): Path of directory from which you want to get the subfiles /- directories
-        full_path (bool, optional): If True the full path of the files gets returned. If False the relative path
+        directory: Path of directory from which you want to get the subfiles /- directories
+        full_path: If True the full path of the files gets returned. If False the relative path
+        only_files: If true only files but no directories are getting yielded
 
     Yields:
         str: The next recursive file or directory in the given directory
@@ -26,13 +27,17 @@ def recursive_directory_data(directory: str, full_path=True) -> _Generator[str]:
         directory = directory[:-1]
 
     for path, subdirs, files in _os.walk(directory):
-        if full_path:
-            yield _os.path.join(path, _os.sep.join(subdirs))
-        else:
-            if path.endswith(_os.sep):
-                path = path[:path.rfind(_os.sep)]
-            yield path[path.rfind(_os.sep) + 1:]
+        # yields the directory
+        if not only_files:
+            if full_path:
+                yield _os.path.join(path, _os.sep.join(subdirs))
+            else:
+                if path.endswith(_os.sep):
+                    path = path[:path.rfind(_os.sep)]
+                yield path[path.rfind(_os.sep) + 1:]
+
         for name in files:
+            # yields the file
             if full_path:
                 yield _os.path.join(path, name)
             else:
@@ -95,4 +100,4 @@ def replace_line(file: str, to_replace: _Union[int, str, _List[int], _List[str]]
 
     with open(file, 'w') as file:
         file.writelines(lines)
-        file.cl_ose()
+        file.close()

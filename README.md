@@ -11,11 +11,11 @@ but if you need those methods you know where to find them.
 
 
 <p align="center">
-    <a href="#Installation">Installation</a>
+    <a href="#Installation">Installation💻</a>
     •
-    <a href="#Examples">Examples</a>
+    <a href="#Examples">Examples💡</a>
     •
-    <a href="#Licence">Licence</a>
+    <a href="#Licence">Licence📝</a>
 </p>
 
 

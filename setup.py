@@ -1,20 +1,22 @@
 #!/usr/bin/python3
 
+from dreamutils import __author__, __version__
 from setuptools import find_packages, setup
 
 #  with open('requirements.txt', 'r') as requirements:
 #      required = requirements.read().splitlines()
+
 
 with open('README.md', 'r') as readme:
     long_description = readme.read()
 
 setup(
     name='dreamutils',
-    version='0.1.0',
+    version=__version__,
     packages=find_packages(),
-    url='',
+    url='https://github.com/ByteDream/dreamutils',
     license='LGPL-3.0',
-    author='ByteDream',
+    author=__author__,
     author_email='',
     description='A collection of useful and often repeated python methods',
     long_description=long_description,
